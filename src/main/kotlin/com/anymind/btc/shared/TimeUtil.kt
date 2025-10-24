@@ -1,7 +1,6 @@
 package com.anymind.btc.shared
 
 import java.time.Instant
-import java.time.OffsetDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
@@ -15,7 +14,7 @@ object TimeUtil {
         } catch (e: DateTimeParseException) {
             // Convert to an IllegalArgumentException so it maps to 400
             throw IllegalArgumentException(
-                e.message,
+                "invalid datetime format (use ISO-8601, e.g. 2019-10-05T14:45:05+07:00)",
                 e
             )
         }
