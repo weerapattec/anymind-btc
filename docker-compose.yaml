@@ -1,0 +1,26 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: anymind
+      POSTGRES_USER: anymind
+      POSTGRES_PASSWORD: anymind
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U anymind -d anymind"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/anymind
+      SPRING_DATASOURCE_USERNAME: anymind
+      SPRING_DATASOURCE_PASSWORD: anymind
+    ports:
+      - "8080:8080"

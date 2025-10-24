@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/anymind
+    username: anymind
+    password: anymind
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate.jdbc.time_zone: UTC
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+app:
+  initial-balance: 1000.0
+  future-skew-seconds: 120
+  projector:
+    enabled: true
+    interval-ms: 1000
+    batch-size: 1000
